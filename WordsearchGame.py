@@ -129,3 +129,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+add valid box checker
+add life
+add time
+add score card (life and time function)
+add difficulty
+make box look better
+remove the double click on check button (optional)
+"""
