@@ -1,3 +1,4 @@
+from collections import defaultdict
 class Trie:
     class Node:
         def __init__(self):
@@ -30,7 +31,7 @@ class Trie:
             if itr.end:
                 index_r -= direction_x
                 index_c -= direction_y
-                result_str = f'{word},"{row},{col}","{index_r},{index_c}"\n'
+                result_str = f'{word}'
                 return result_str
 
             if itr.next is None:
@@ -45,22 +46,22 @@ class Trie:
                 index_c += direction_y
                 if not self.index_checker(index_r, index_c, len(board), len(board[0])):
                     if itr is not None and itr.end:
-                        result_str = f'{word},"{row},{col}","{index_r},{index_c}"\n'
+                        result_str = f'{word}'
                         return result_str
                     return None
 
     def solve(self, board):
         directions = [[0, -1], [-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1]]
         txt_file = "wordlist.txt"
-
+        solution = defaultdict(int)
         self.insert_file(txt_file)
-        with open("solution.csv", 'w') as file:
-            for i in range(len(board)):
-                for j in range(len(board[i])):
-                    for k in directions:
-                        word = self.solve_board(k[0], k[1], i, j, board)
-                        if word is not None:
-                            file.write(word)
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                for k in directions:
+                    word = self.solve_board(k[0], k[1], i, j, board)
+                    if word is not None:
+                        solution[word] += 1
+        return solution
 
     def insert_file(self, file):
         with open(file, 'r') as f:
