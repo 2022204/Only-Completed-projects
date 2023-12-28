@@ -283,8 +283,3 @@ def main():
         
 if __name__ == "__main__":
     main()
-"""
-add valid box checker
-
-remove the double click on check button (optional)
-"""
